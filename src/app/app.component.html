@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="app">
+
+  <mat-sidenav #sidenav mode="side" opened class="menu-container">
+    <ul>
+      <li><a routerLink="dashboard">dashboard</a></li>
+      <li><a routerLink="locations">locations</a></li>
+    </ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="router-container">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

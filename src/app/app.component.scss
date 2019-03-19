@@ -1,0 +1,22 @@
+.app {
+  height: 100vh;
+  position: relative;
+  .menu-container {
+    background: rgb(32, 32, 32);
+    color: white;
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        a {
+          color: inherit;
+          padding: 10px;
+          display: block;
+        }
+      }
+    }
+  }
+  .router-container {
+    background: rgb(245, 245, 245);
+  }
+}
