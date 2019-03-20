@@ -1,9 +1,19 @@
+<app-header></app-header>
+
 <mat-sidenav-container class="app">
 
   <mat-sidenav #sidenav mode="side" opened class="menu-container">
     <ul>
-      <li><a routerLink="dashboard">dashboard</a></li>
-      <li><a routerLink="locations">locations</a></li>
+      <li>
+        <a routerLink="dashboard" routerLinkActive="active-link">
+          <img src="assets/icons/weather.svg">
+        </a>
+      </li>
+      <li>
+        <a routerLink="locations" routerLinkActive="active-link">
+          <img src="assets/icons/marker.svg">
+        </a>
+      </li>
     </ul>
   </mat-sidenav>
 

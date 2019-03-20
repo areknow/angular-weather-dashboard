@@ -1,0 +1,49 @@
+.header {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #E7E8EE;
+  display: flex;
+
+  .logo, 
+  .search,
+  .user {
+    display: inline-block;
+  }
+
+  .logo,
+  .user {
+    width: 80px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 40px;
+      width: 40px;
+    }
+  }
+  .search {
+    flex-grow: 1;
+    text-align: center;
+    border-right: 1px solid #E7E8EE;
+  }
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .user-image {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 100%;
+      height: 40px;
+      width: 40px;
+    }
+    .default-img {
+      background-image: url(/assets/icons/user.svg);
+    }
+  }
+
+}

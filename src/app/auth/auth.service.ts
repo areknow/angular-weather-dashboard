@@ -51,12 +51,14 @@ export class AuthService {
       .then(res => resolve(res))
       .catch(err => reject(err));
     });
+    console.log(this.authResponse);
     // Check if response has authorized user
     if (this.authResponse.user.emailVerified) {
       // Navigate back to page that auth guard triggered on
       this.router.navigate(['/', this.returnUrl]);
       // Set the user cookie with expiration
       this.cookieService.put('WD_GUID', this.authResponse.user.uid, { expires: this.date });
+      this.cookieService.put('WD_PIMG', this.authResponse.additionalUserInfo.profile.picture, { expires: this.date });
       // Set user records in firebase
       this.collection.doc(this.authResponse.user.uid).set({
         name: this.authResponse.user.displayName,

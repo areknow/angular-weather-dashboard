@@ -1,0 +1,19 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+* {
+  box-sizing: border-box;
+}
+body {
+  padding: 0;
+  margin: 0;
+  background: #F5F6FA;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+.mat-drawer-container {
+  background: none;
+}
