@@ -28,6 +28,7 @@
     flex-grow: 1;
     text-align: center;
     border-right: 1px solid #E7E8EE;
+    position: relative;
     .input-container {
       position: relative;
       img {
@@ -36,24 +37,36 @@
         position: absolute;
         top: -4px;
         bottom: 0;
-        left: 0;
         margin: auto;
         pointer-events: none;
         cursor: pointer;
+        z-index: 10;
       }
-      input {
-        height: 70px;
-        border: 0;
-        background: none;
-        font-size: 20px;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 200;
-        outline: none;
-        width: 400px;
-        padding-left: 40px;
-        color: black;
+      .search-img {
+        left: 0;
       }
-
+      .cross-img {
+        right: 0;
+        pointer-events: all;
+        height: 16px;
+        width: 16px;
+      }
+      form {
+        display: inline-block;
+        input {
+          height: 70px;
+          border: 0;
+          background: none;
+          font-size: 20px;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 200;
+          outline: none;
+          width: 400px;
+          padding-left: 30px;
+          padding-right: 30px;
+          color: black;
+        }
+      }
       $placeholder: rgb(196, 196, 196);
       ::-webkit-input-placeholder {
         color: $placeholder;
@@ -68,7 +81,43 @@
         color: $placeholder;
       }
     }
-
+    .results {
+      background: rgb(39, 39, 39);
+      position: absolute;
+      width: 400px;
+      top: 70px;
+      color: white;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 100;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+      ul {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        list-style: none;
+        max-height: 500px;
+        overflow-y: scroll;
+        li {
+          letter-spacing: 1px;
+          font-weight: 300;
+          cursor: pointer;
+          padding: 10px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.233);
+          &:last-child {
+            border-bottom: 0;
+          }
+          &:hover {
+            &:last-child {
+              border-radius: 0 0 10px 10px;
+            }
+            background: rgb(58, 58, 58);
+          }
+        }
+      }
+    }
   }
   .user {
     display: flex;

@@ -4,9 +4,17 @@
   </div>
   <div class="search">
     <span class="input-container">
-      <img src="assets/icons/search.svg">
-      <input placeholder="Search city, state, zip, etc...">
+      <img class="search-img" src="assets/icons/search.svg">
+      <form #form="ngForm" (ngSubmit)="submitForm(form.value.location)" autocomplete="off">
+        <input name="location" [(ngModel)]="location" placeholder="Search city, state, zip, etc..." spellcheck="false">
+      </form>
+      <img *ngIf="response.length > 0" class="cross-img" src="assets/icons/cross.svg" (click)="closeResponse()">
     </span>
+    <div class="results" *ngIf="response.length > 0">
+      <ul>
+        <li *ngFor="let item of response" (click)="selectLocation(item)">{{ item.EnglishName }}, {{ item.AdministrativeArea.ID }}, {{ item.Country.ID }}, {{ item.Region.EnglishName }}</li>
+      </ul>
+    </div>
   </div>
   <div class="user">
     <ng-container *ngIf="authService.authResponse">
