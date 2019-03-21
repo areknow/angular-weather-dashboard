@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatSnackBarModule, MatTableModule } from '@angular/material';
+import { CardModule } from '../shared/components/card/card.module';
+import { ModalModule } from '../shared/modal/modal.module';
+import { SpinnerModule } from '../shared/spinner/spinner.module';
 import { LocationsRoutingModule } from './locations-routing.module';
 import { LocationsComponent } from './locations.component';
 import { LocationsService } from './locations.service';
@@ -15,7 +18,11 @@ import { LocationsService } from './locations.service';
     HttpClientModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    CardModule,
+    ModalModule,
+    MatSnackBarModule,
+    SpinnerModule
   ],
   declarations: [LocationsComponent],
   providers: [

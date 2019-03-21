@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { ModalModule } from './shared/modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     A11yModule,
     MatSidenavModule,
+    ModalModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

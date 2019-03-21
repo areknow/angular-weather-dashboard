@@ -12,6 +12,8 @@ export class CoreService {
 
   activeLocation: any;
 
+  modalIsOpen = false;
+
   constructor(private http: HttpClient) { }
 
   /**
@@ -27,5 +29,7 @@ export class CoreService {
     // Make request
     return this.http.get(url, { params: params }).pipe(map((data: any) => data)).toPromise();
   }
+
+
 
 }

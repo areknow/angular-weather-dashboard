@@ -1,0 +1,7 @@
+<div class="modal-cover" (click)="closeModal()" *ngIf="coreService.modalIsOpen">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <app-card>
+      <ng-content></ng-content>
+    </app-card>
+  </div>
+</div>

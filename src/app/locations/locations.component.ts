@@ -1,9 +1,11 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar, MatSort } from '@angular/material';
 import { CookieService } from 'angular2-cookie';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { CoreService } from '../core/core.service';
 import { LocationsService } from './locations.service';
 
 @Component({
@@ -13,22 +15,26 @@ import { LocationsService } from './locations.service';
 })
 export class LocationsComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+
+  loading = true;
+
   location: string;
-  response: any;
+  response = [];
 
   selection = new SelectionModel<any>(true, []);
 
   collection: AngularFirestoreCollection<any>;
   items: Observable<any[]>;
 
-  response2 = [
-    {Key: 1, EnglishName: 'Detroit', AdministrativeArea: 'MI', PrimaryPostalCode: '48226'}
-  ];
+  tableData: any;
 
   constructor(
     private locationsService: LocationsService,
     private afs: AngularFirestore,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    public coreService: CoreService,
+    private snackBar: MatSnackBar
   ) {
     // Initiate fire store collection holder and query for user id
     this.collection = this.afs.collection<any>('locations', ref => {
@@ -42,6 +48,10 @@ export class LocationsComponent implements OnInit {
         return { docId, data };
       });
     }));
+    this.items.subscribe(data => {
+      this.tableData = data;
+      this.loading = false;
+    });
   }
 
   ngOnInit() { }
@@ -53,23 +63,53 @@ export class LocationsComponent implements OnInit {
   async submitForm(query: string): Promise<void> {
     try {
       this.response = await this.locationsService.getLocationData(query);
-      console.log(this.response);
     } catch (err) {
       console.log(err);
     }
   }
 
-  saveLocation(location) {
-    const userCookie = this.cookieService.get('WD_GUID');
-    this.collection.add({
-      id: userCookie,
-      location: location
-    })
-    .catch((error) => console.log(error));
+  saveLocation(newLocation) {
+    // Get user items
+    const collection = this.afs.collection('locations', ref => {
+      return ref.where('id', '==', this.cookieService.get('WD_GUID'));
+    });
+    const locations = collection.valueChanges();
+    locations.pipe(take(1)).subscribe((data: any) => {
+      // Check if user already has this location saved
+      const checkForMatch = obj => obj.location.Key === newLocation.Key;
+      if (!data.some(checkForMatch)) {
+        const userCookie = this.cookieService.get('WD_GUID');
+        // Add location
+        this.collection.add({
+          id: userCookie,
+          location: newLocation
+        })
+        .then(val => {
+          this.snackBar.open('Location sucessfully added to your profile.', 'Close', {
+            duration: 2000,
+          });
+        })
+        .catch((error) => console.log(error));
+      } else {
+        this.snackBar.open('Sorry, this location is already saved.', 'Close', {
+          duration: 2000,
+        });
+      }
+    });
   }
 
   removeRow(row) {
     this.collection.doc(row.docId).delete();
+  }
+
+  openModal() {
+    this.coreService.modalIsOpen = true;
+  }
+
+  closeModal() {
+    this.coreService.modalIsOpen = false;
+    this.response = [];
+    this.location = '';
   }
 
 }

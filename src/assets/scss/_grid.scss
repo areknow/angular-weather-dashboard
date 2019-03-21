@@ -1,0 +1,21 @@
+.col-wrapper {
+  font-size: 0;
+  .col {
+    display: inline-block; 
+    font-size: 14px; 
+    vertical-align: top; 
+  }
+  .one                { width: calc( 100% / 12 ) }
+  .two                { width: calc( (100% / 12) * 2 ) }
+  .two-point-four     { width: calc( (100% / 12) * 2.4 ) }
+  .three              { width: calc( (100% / 12) * 3 ) }
+  .four               { width: calc( (100% / 12) * 4 ) }
+  .five               { width: calc( (100% / 12) * 5 ) }
+  .six                { width: calc( (100% / 12) * 6 ) }
+  .seven              { width: calc( (100% / 12) * 7 ) }
+  .eight              { width: calc( (100% / 12) * 8 ) }
+  .nine               { width: calc( (100% / 12) * 9 ) }
+  .ten                { width: calc( (100% / 12) * 10 ) }
+  .eleven             { width: calc( (100% / 12) * 11 ) }
+  .twelve             { width: 100% }
+}

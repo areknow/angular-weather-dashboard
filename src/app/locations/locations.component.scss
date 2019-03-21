@@ -1,11 +1,122 @@
 .locations {
-  padding: 40px;
-  width: 100%;
   table {
-    width: 80%;
+    width: 100%;
   }
 }
 
 .align-right {
   text-align: right;
+}
+
+.add-modal-container {
+  position: relative;
+  .add-modal {
+    .input-container {
+      position: relative;
+      img {
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        top: -4px;
+        bottom: 0;
+        margin: auto;
+        pointer-events: none;
+        cursor: pointer;
+      }
+      .search-img {
+        left: 0;
+      }
+      .cross-img {
+        right: 0;
+        pointer-events: all;
+        height: 16px;
+        width: 16px;
+      }
+      form {
+        display: inline-block;
+        width: 100%;
+        input {
+          height: 70px;
+          border: 0;
+          background: none;
+          font-size: 20px;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 200;
+          outline: none;
+          width: 100%;
+          padding-left: 30px;
+          padding-right: 30px;
+          color: black;
+        }
+      }
+      $placeholder: #c4c4c4;
+      ::-webkit-input-placeholder {
+        color: $placeholder;
+      }
+      ::-moz-placeholder {
+        color: $placeholder;
+      }
+      :-ms-input-placeholder {
+        color: $placeholder;
+      }
+      :-moz-placeholder {
+        color: $placeholder;
+      }
+    }
+  }
+  .results {
+    background: rgb(39, 39, 39);
+    position: absolute;
+    width: 750px;
+    top: 90px;
+    color: white;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 100;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    ul {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      list-style: none;
+      max-height: 500px;
+      overflow-y: scroll;
+      li {
+        position: relative;
+        letter-spacing: 1px;
+        font-weight: 300;
+        cursor: pointer;
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.233);
+        &:last-child {
+          border-bottom: 0;
+        }
+        &:hover {
+          &:last-child {
+            border-radius: 0 0 10px 10px;
+          }
+          background: rgb(58, 58, 58);
+        }
+        .add {
+          position: absolute;
+          right: 20px;
+          bottom: 0;
+          top: 0;
+          margin: auto;
+          width: 20px;
+          height: 20px;
+          opacity: .3;
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        &:hover .add {
+          opacity: 1;
+        }
+      }
+    }
+  }
 }

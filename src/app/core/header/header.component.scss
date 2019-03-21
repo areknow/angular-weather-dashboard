@@ -32,7 +32,7 @@
     .input-container {
       position: relative;
       img {
-        height: 70px;
+        height: 20px;
         width: 20px;
         position: absolute;
         top: -4px;
@@ -40,7 +40,6 @@
         margin: auto;
         pointer-events: none;
         cursor: pointer;
-        z-index: 10;
       }
       .search-img {
         left: 0;
@@ -67,7 +66,7 @@
           color: black;
         }
       }
-      $placeholder: rgb(196, 196, 196);
+      $placeholder: #c4c4c4;
       ::-webkit-input-placeholder {
         color: $placeholder;
       }
@@ -101,6 +100,7 @@
         max-height: 500px;
         overflow-y: scroll;
         li {
+          position: relative;
           letter-spacing: 1px;
           font-weight: 300;
           cursor: pointer;
