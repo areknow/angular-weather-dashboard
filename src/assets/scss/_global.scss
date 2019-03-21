@@ -23,8 +23,16 @@ body {
       flex: 50%; 
     }
     .right {
-      span {
+      div {
+        display: inline-block;
+        margin: 0 5px;
+        img {
+          height: 10px;;
+        }
+      }
+      .action {
         font-weight: 500;
+        cursor: pointer;
       }
     }
   }

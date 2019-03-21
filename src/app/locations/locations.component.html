@@ -1,7 +1,14 @@
 <div class="locations page">
   <div class="header">
     <div class="title">Saved locations</div>
-    <div class="right" (click)="openModal()"><span>Add new +</span></div>
+    <div class="right">
+      <div class="action" (click)="openModal()">
+        <div>Add new</div>
+        <div>
+          <img src="assets/icons/add.svg">
+        </div>
+      </div>
+    </div>
   </div>
   <div class="cards">
     <div class="col-wrapper">
@@ -11,25 +18,25 @@
             <app-spinner></app-spinner>
           </ng-container>
           <ng-container *ngIf="!loading">
-            <table mat-table [dataSource]="tableData">
+            <table mat-table matSort [dataSource]="sortedTableData" (matSortChange)="sortData($event)" matSortActive="city" matSortDirection="asc">
               <ng-container matColumnDef="city">
-                <th mat-header-cell *matHeaderCellDef> City </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="city"> City </th>
                 <td mat-cell *matCellDef="let element"> {{element.data.location.EnglishName}} </td>
               </ng-container>
               <ng-container matColumnDef="state">
-                <th mat-header-cell *matHeaderCellDef> State </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="state"> State </th>
                 <td mat-cell *matCellDef="let element"> {{element.data.location.AdministrativeArea.EnglishName}} </td>
               </ng-container>
               <ng-container matColumnDef="country">
-                <th mat-header-cell *matHeaderCellDef> Country </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="country"> Country </th>
                 <td mat-cell *matCellDef="let element"> {{element.data.location.Country.EnglishName}} </td>
               </ng-container>
               <ng-container matColumnDef="region">
-                <th mat-header-cell *matHeaderCellDef> Region </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="region"> Region </th>
                 <td mat-cell *matCellDef="let element"> {{element.data.location.Region.EnglishName}} </td>
               </ng-container>
               <ng-container matColumnDef="zip">
-                <th mat-header-cell *matHeaderCellDef> Zip </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="zip"> Zip </th>
                 <td mat-cell *matCellDef="let element"> {{element.data.location.PrimaryPostalCode}} </td>
               </ng-container>
               <ng-container matColumnDef="remove">

@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSnackBar, MatSort } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, Sort } from '@angular/material';
 import { CookieService } from 'angular2-cookie';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
@@ -15,8 +15,6 @@ import { LocationsService } from './locations.service';
 })
 export class LocationsComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort;
-
   loading = true;
 
   location: string;
@@ -28,6 +26,7 @@ export class LocationsComponent implements OnInit {
   items: Observable<any[]>;
 
   tableData: any;
+  sortedTableData: any;
 
   constructor(
     private locationsService: LocationsService,
@@ -50,6 +49,8 @@ export class LocationsComponent implements OnInit {
     }));
     this.items.subscribe(data => {
       this.tableData = data;
+      this.sortedTableData = this.tableData.slice();
+      this.sortData({active: 'city', direction: 'asc'});
       this.loading = false;
     });
   }
@@ -112,4 +113,29 @@ export class LocationsComponent implements OnInit {
     this.location = '';
   }
 
+  sortData(sort: Sort) {
+    console.log(sort);
+    const data = this.tableData.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedTableData = data;
+      return;
+    }
+    this.sortedTableData = data.sort((a, b) => {
+      console.log(a , b);
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'city': return compare(a.data.location.LocalizedName, b.data.location.LocalizedName, isAsc);
+        case 'state': return compare(a.data.location.AdministrativeArea.EnglishName, b.data.location.AdministrativeArea.EnglishName, isAsc);
+        case 'country': return compare(a.data.location.Country.EnglishName, b.data.location.Country.EnglishName, isAsc);
+        case 'region': return compare(a.data.location.Region.EnglishName, b.data.location.Region.EnglishName, isAsc);
+        case 'zip': return compare(a.data.location.PrimaryPostalCode, b.data.location.PrimaryPostalCode, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
